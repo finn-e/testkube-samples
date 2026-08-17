@@ -14,7 +14,7 @@ spec:
         image: ghcr.io/orange-opensource/hurl:latest
         args:
           - --test
-          - apps/api/tests/app.hurl
+          - /data/repo/apps/api/tests/app.hurl
           - --variable
           - origin=http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
 ---
@@ -23,6 +23,8 @@ kind: TestWorkflow
 metadata:
   name: web-cypress-workflow
   namespace: testkube
+  labels:
+    argocd.argoproj.io/instance: veo-app
 spec:
   content:
     git:
@@ -35,5 +37,5 @@ spec:
         command: [/bin/sh, -c]
         args:
           - |
-            cd apps/web
+            cd /data/repo/apps/web
             cypress run --config baseUrl=http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
