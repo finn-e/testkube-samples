@@ -3,7 +3,10 @@ import testkubeLogo from "./assets/testkube.svg";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 
-const API_ORIGIN = "http://localhost:8080";
+const API_ORIGIN =
+  window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://localhost:8080"
+    : window.location.origin;
 
 function App() {
   return (

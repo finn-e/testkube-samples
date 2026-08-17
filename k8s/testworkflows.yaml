@@ -1,0 +1,41 @@
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: api-hurl-workflow
+  namespace: testkube
+spec:
+  content:
+    git:
+      uri: https://github.com/finn-e/testkube-samples.git
+      revision: main
+  steps:
+    - name: run-hurl-tests
+      run:
+        image: ghcr.io/orange-opensource/hurl:latest
+        args:
+          - hurl
+          - --test
+          - --glob
+          - apps/api/tests/*.hurl
+          - --variable
+          - origin=http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
+---
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: web-cypress-workflow
+  namespace: testkube
+spec:
+  content:
+    git:
+      uri: https://github.com/finn-e/testkube-samples.git
+      revision: main
+  steps:
+    - name: run-cypress-tests
+      run:
+        image: cypress/included:13.9.0
+        command: [/bin/sh, -c]
+        args:
+          - |
+            cd apps/web
+            cypress run --config baseUrl=http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
