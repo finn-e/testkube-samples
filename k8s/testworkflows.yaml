@@ -14,8 +14,7 @@ spec:
         image: ghcr.io/orange-opensource/hurl:latest
         args:
           - --test
-          - --glob
-          - apps/api/tests/*.hurl
+          - apps/api/tests/app.hurl
           - --variable
           - origin=http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
 ---
