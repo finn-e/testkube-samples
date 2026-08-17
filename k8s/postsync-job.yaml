@@ -16,13 +16,10 @@ spec:
           args:
             - |
               set -e
-              echo "Setting Testkube direct HTTP context..."
-              testkube set context --api-uri http://testkube-api-server.testkube.svc.cluster.local:8088 --client direct
-              
               echo "Executing Hurl API test workflow..."
-              testkube run tw api-hurl-workflow -f --client direct
+              testkube -a http://testkube-api-server.testkube.svc.cluster.local:8088 -c direct run tw api-hurl-workflow -f
               
               echo "Executing Cypress Web test workflow..."
-              testkube run tw web-cypress-workflow -f --client direct
+              testkube -a http://testkube-api-server.testkube.svc.cluster.local:8088 -c direct run tw web-cypress-workflow -f
       restartPolicy: Never
   backoffLimit: 0
