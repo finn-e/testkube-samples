@@ -9,6 +9,7 @@ metadata:
 spec:
   template:
     spec:
+      serviceAccountName: testkube-operator-controller-manager
       containers:
         - name: run-tests
           image: kubeshop/testkube-cli:latest
@@ -16,8 +17,8 @@ spec:
           args:
             - |
               set -e
-              echo "Setting Testkube API server context..."
-              testkube set context --api-uri http://testkube-api-server.testkube.svc.cluster.local:8088
+              echo "Setting Testkube local context..."
+              testkube set context --kubeconfig --namespace testkube
               
               echo "Executing Hurl API test workflow..."
               testkube run tw api-hurl-workflow -f
