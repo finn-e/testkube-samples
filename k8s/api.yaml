@@ -16,7 +16,7 @@ spec:
       containers:
         - name: api
           image: ghcr.io/finn-e/testkube-samples-api:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
           env:

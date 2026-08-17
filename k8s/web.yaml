@@ -16,7 +16,7 @@ spec:
       containers:
         - name: web
           image: ghcr.io/finn-e/testkube-samples-web:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 4173
           resources:
