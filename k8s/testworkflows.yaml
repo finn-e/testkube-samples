@@ -13,7 +13,6 @@ spec:
       run:
         image: ghcr.io/orange-opensource/hurl:latest
         args:
-          - hurl
           - --test
           - --glob
           - apps/api/tests/*.hurl
